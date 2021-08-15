@@ -1,0 +1,788 @@
+openapi: "3.0.2"
+info:
+  title: Perny API
+  version: "1.3.0"
+  description: docs of perny
+servers:
+  - url: https://pernymarket.ir/api/v1/
+  - url: http://localhost:8443/api/v1
+tags:
+- name: Admin 
+
+
+paths:
+  /admin/banner:  
+    post:
+       tags:
+         - Admin
+       summary: "adds an banner"
+       
+       requestBody:
+         content:
+           application/json:
+             schema:
+               $ref: '#/components/schemas/Banner'
+         required: true
+       responses:
+         201:
+           description: 2012 = Banner added
+         500:
+          description: 1099 = Something is wrong
+    get:
+        tags:
+          - Admin
+        summary: returns overview for the selected banner
+        description: Returns overview for the selected banner
+        responses:
+         200:
+           description: Successful operation
+         500:
+           description: 1099 = Something is wrong      
+    
+  /admin/banner/p/{page}:
+    get:
+      tags:
+        - Admin
+      summary: show all banners
+      description: Shows all banners
+      parameters:
+        - name: page
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        200:
+          description: Successful operation
+        500:
+          description: 1099 = Something is wrong
+  /admin/banner/{bannerId}:
+    get:
+        tags:
+          - Admin
+        summary: returns overview for the selected banner
+        description: Returns overview for the selected banner
+        parameters:
+         - name: bannerId
+           in: path
+           required: true
+           schema:
+             type: string
+        responses:
+         200:
+           description: Successful operation
+         500:
+           description: 1099 = Something is wrong
+    delete:
+      tags:
+        - Admin
+      summary: "deletes a banner"
+      description: "Deletes a banner"
+      parameters:
+        - name: bannerId
+          in: path
+          description: banners ID to delete
+          required: true
+          schema:
+            type: string
+      responses:
+        204:
+          description: 4012 = Successful operation
+        500:
+          description: 1099 = Something is wrong    
+    put:
+      tags:
+        - Admin
+      summary: edit a banner
+      description: Edit a banner
+      parameters:
+        - name: bannerId
+          in: path
+          description: banner ID to edit
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EditBanner'
+      responses:
+        200:
+          description: 3012 = Banner Edited
+        500:
+          description: 1099 = Something is wrong
+  /admin/slider:  
+    post:
+       tags:
+         - Admin
+       summary: "adds a slider"
+       
+       requestBody:
+         content:
+           application/json:
+             schema:
+               $ref: '#/components/schemas/Slider'
+         required: true
+       responses:
+         201:
+           description: 2013 = Slider added
+         500:
+          description: 1099 = Something is wrong
+    get:
+        tags:
+          - Admin
+        summary: returns overview for the selected slider
+        description: Returns overview for the selected slider
+        responses:
+         200:
+           description: Successful operation
+         500:
+           description: 1099 = Something is wrong      
+  /admin/slider/p/{page}:
+    get:
+      tags:
+        - Admin
+      summary: show all sliders
+      description: Shows all sliders
+      parameters:
+        - name: page
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        200:
+          description: Successful operation
+        500:
+          description: 1099 = Something is wrong
+  /admin/sliders/{slidersId}:
+    get:
+        tags:
+          - Admin
+        summary: returns overview for the selected sliders
+        description: Returns overview for the selected sliders
+        parameters:
+         - name: slidersId
+           in: path
+           required: true
+           schema:
+             type: string
+        responses:
+         200:
+           description: Successful operation
+         500:
+           description: 1099 = Something is wrong
+    delete:
+      tags:
+        - Admin
+      summary: "deletes a sliders"
+      description: "Deletes a sliders"
+      parameters:
+        - name: slidersId
+          in: path
+          description: sliders ID to delete
+          required: true
+          schema:
+            type: string
+      responses:
+        204:
+          description: 3013 = Successful operation
+        500:
+          description: 1099 = Something is wrong    
+    put:
+      tags:
+        - Admin
+      summary: edit a sliders
+      description: Edit a sliders
+      parameters:
+        - name: slidersId
+          in: path
+          description: sliders ID to edit
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EditSlider'
+      responses:
+        200:
+          description: 3013 = sliders Edited
+        500:
+          description: 1099 = Something is wrong      
+  /admin/product:  
+    post:
+       tags:
+         - Admin
+       summary: "adds a product"
+       
+       requestBody:
+         content:
+           application/json:
+             schema:
+               $ref: '#/components/schemas/Product'
+         required: true
+       responses:
+         201:
+           description: 2011 = Product added
+         500:
+          description: 1099 = Something is wrong
+    get:
+        tags:
+          - Admin
+        summary: returns overview for the selected product
+        description: Returns overview for the selected product
+        responses:
+         200:
+           description: Successful operation
+         500:
+           description: 1099 = Something is wrong  
+
+  /admin/product/{productName}/{page}:
+    get:
+      tags:
+        - Admin
+      summary: show paginated products
+      description: products searched by name and paginated 
+      parameters:
+        - name: page
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: productName
+          in: path
+          required: true
+          schema:
+            type: string
+            
+      responses:
+        200:
+          description: Successful operation
+        500:
+          description: 1099 = Something is wrong
+  
+         
+  /admin/product/p/{page}:
+    get:
+      tags:
+        - Admin
+      summary: show all products
+      description: Shows all products
+      parameters:
+        - name: page
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        200:
+          description: Successful operation
+        500:
+          description: 1099 = Something is wrong
+  /admin/product/{productId}:
+    get:
+      tags:
+        - Admin
+      summary: returns overview for the selected product
+      description: Returns overview for the selected product
+      parameters:
+        - name: productId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Successful operation
+        500:
+          description: 1099 = Something is wrong
+    delete:
+      tags:
+        - Admin
+      summary: "deletes a product"
+      description: "Deletes a product"
+      parameters:
+        - name: productId
+          in: path
+          description: product ID to delete
+          required: true
+          schema:
+            type: string
+      responses:
+        204:
+          description: 4011 = Successful operation
+        500:
+          description: 1099 = Something is wrong    
+    put:
+      tags:
+        - Admin
+      summary: edit a product
+      description: Edit a product
+      parameters:
+        - name: productId
+          in: path
+          description: product ID to edit
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EditProduct'
+      responses:
+        200:
+          description: 3011 = product Edited
+        500:
+          description: 1099 = Something is wrong
+  /admin/category:  
+    post:
+       tags:
+         - Admin
+       summary: "adds a category"
+       
+       requestBody:
+         content:
+           application/json:
+             schema:
+               $ref: '#/components/schemas/Category'
+         required: true
+       responses:
+         201:
+           description: 2011 = category added
+         500:
+          description: 1099 = Something is wrong
+    get:
+        tags:
+          - Admin
+        summary: returns overview for the selected category
+        description: Returns overview for the selected category
+        responses:
+         200:
+           description: Successful operation
+         500:
+           description: 1099 = Something is wrong      
+    
+  /admin/category/{page}:
+    get:
+      tags:
+        - Admin
+      summary: show all categories
+      description: Shows all categories
+      parameters:
+        - name: page
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        200:
+          description: Successful operation
+        500:
+          description: 1099 = Something is wrong
+  /admin/category/{categoryName}/{page}:
+    get:
+      tags:
+        - Admin
+      summary: show paginated categories
+      description: categories searched by name and paginated 
+      parameters:
+        - name: page
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: categoryName
+          in: path
+          required: true
+          schema:
+            type: string
+            
+      responses:
+        200:
+          description: Successful operation
+        500:
+          description: 1099 = Something is wrong        
+  /admin/category/{categoryId}:
+    get:
+      tags:
+        - Admin
+      summary: returns overview for the selected category
+      description: Returns overview for the selected category
+      parameters:
+        - name: categoryId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Successful operation
+        500:
+          description: 1099 = Something is wrong
+    delete:
+      tags:
+        - Admin
+      summary: "deletes a category"
+      description: "Deletes a category"
+      parameters:
+        - name: categoryId
+          in: path
+          description: category ID to delete
+          required: true
+          schema:
+            type: string
+      responses:
+        204:
+          description: 4010 = Successful operation
+        500:
+          description: 1099 = Something is wrong    
+    put:
+      tags:
+        - Admin
+      summary: edit a category
+      description: Edit a category
+      parameters:
+        - name: categoryId
+          in: path
+          description: category ID to edit
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EditCategory'
+      responses:
+        200:
+          description: 3010 = category Edited
+        500:
+          description: 1099 = Something is wrong
+  /banner:        
+    get:
+      tags:
+        - User
+      summary: returns overview for the selected category
+      description: Returns overview for the selected category
+      responses:
+        200:
+          description: Successful operation
+        500:
+          description: 1099 = Something is wrong      
+  /banner/{page}:
+    get:
+      tags:
+        - User
+      summary: show all banners
+      description: Shows all banners
+      parameters:
+        - name: page
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        200:
+          description: Successful operation
+        500:
+          description: 1099 = Something is wrong
+  /banner/{bannerId}:
+    get:
+      tags:
+        - User
+      summary: returns overview for the selected banner
+      description: Returns overview for the selected banner
+      parameters:
+        - name: bannerId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Successful operation
+        500:
+          description: 1099 = Something is wrong
+  /category:        
+    get:
+      tags:
+        - User
+      summary: returns overview for the selected category
+      description: Returns overview for the selected category
+      responses:
+        200:
+          description: Successful operation
+        500:
+          description: 1099 = Something is wrong      
+  /category/{page}:
+    get:
+      tags:
+        - User
+      summary: show all categories
+      description: Shows all categories
+      parameters:
+        - name: page
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        200:
+          description: Successful operation
+        500:
+          description: 1099 = Something is wrong
+          
+  /category/{categoryId}:
+    get:
+      tags:
+        - User
+      summary: returns overview for the selected category
+      description: Returns overview for the selected category
+      parameters:
+        - name: categoryId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Successful operation
+        500:
+          description: 1099 = Something is wrong     
+  /product:        
+    get:
+      tags:
+        - User
+      summary: returns overview for the selected products
+      description: Returns overview for the selected products
+      responses:
+        200:
+          description: Successful operation
+        500:
+          description: 1099 = Something is wrong      
+  /product/{page}:
+    get:
+      tags:
+        - User
+      summary: show all products
+      description: Shows all products
+      parameters:
+        - name: page
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        200:
+          description: Successful operation
+        500:
+          description: 1099 = Something is wrong
+  /product/{productId}:
+    get:
+      tags:
+        - User
+      summary: returns overview for the selected category
+      description: Returns overview for the selected category
+      parameters:
+        - name: productId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Successful operation
+        500:
+          description: 1099 = Something is wrong 
+  /slider:        
+    get:
+      tags:
+        - User
+      summary: returns overview for the selected sliders
+      description: Returns overview for the selected sliders
+      responses:
+        200:
+          description: Successful operation
+        500:
+          description: 1099 = Something is wrong      
+  /slider/{page}:
+    get:
+      tags:
+        - User
+      summary: show all sliders
+      description: Shows all sliders
+      parameters:
+        - name: page
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        200:
+          description: Successful operation
+        500:
+          description: 1099 = Something is wrong
+  /slider/{sliderId}:
+    get:
+      tags:
+        - User
+      summary: returns overview for the selected slider
+      description: Returns overview for the selected slider
+      parameters:
+        - name: sliderId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Successful operation
+        500:
+          description: 1099 = Something is wrong          
+  /homeScreen:
+    get:
+      tags:
+        - User
+      summary: returns overview for homeScreen
+      description: Returns overview for homeScreen
+      responses:
+        200:
+          description: Successful operation
+        500:
+          description: 1099 = Something is wrong        
+components:
+    schemas:
+      Banner: 
+        required: 
+          - image
+        type: object
+        properties:
+          image:
+            type: string
+          parentType: 
+            type: string
+            enum:
+              - Product 
+              - Category
+          parent:
+            type: string
+            example: 5e939c4ba0f0ed760c0202b3
+      EditBanner:
+        type: object
+        properties:
+            parentType:
+              type: string
+              enum: 
+                - Product
+                - Category
+            parent:  
+                type: string
+                example: 5e939c4ba0f0ed760c0202b3
+            image:
+              type: string 
+            
+      Category: 
+        required: 
+          - image
+        type: object
+        properties:
+          image:
+            type: string
+          parentType: 
+            type: string
+            enum:
+              - Product 
+              - Category
+          parent:
+            type: string
+            example: 5e939c4ba0f0ed760c0202b3
+      EditCategory:
+        type: object
+        properties:
+            parentType:
+              type: string
+              
+            parent:  
+                type: string
+                example: 5e939c4ba0f0ed760c0202b3
+            image:
+              type: string 
+            
+      Product:
+        required: 
+          - image
+          - name
+          - realPrice
+          - weight 
+          - unit
+          - category
+        type: object
+        properties:
+          image:
+            type: string
+          name: 
+            type: string
+          weight:
+            type: number
+          unit:
+            type: string
+          realPrice:
+            type: string
+          newPrice:
+            type: number
+      EditProduct:
+          type: object
+          properties:
+              image:
+                type: string
+              name: 
+                 type: string
+              weight:
+                  type: number
+              unit:
+                  type: string
+              realPrice:
+                  type: string
+              newPrice:
+                  type: number
+       
+            
+      Slider:
+        required: 
+         - image
+        type: object
+        properties:
+          image:
+            type: string
+          parentType: 
+            type: string
+            enum:
+              - Product 
+              - Category
+          parent:
+            type: string
+            example: 5e939c4ba0f0ed760c0202b3
+      EditSlider:
+            type: object
+            properties:
+              parentType:
+                type: string
+              parent:  
+                type: string
+                example: 5e939c4ba0f0ed760c0202b3
+              image:
+                type: string   
