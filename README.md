@@ -1,7 +1,7 @@
-an api written in js/express with mongodb as db, and mongoose as orm.<br/>
+## an api written in js/express with mongodb as db, and mongoose as orm.<br/>
 
 
-summarised features:<br/>
+## summarised features:<br/>
  1. admin:<br/>
         1-CRUD for products/blogs/sliders/etc.<br/>
         2-image upload.<br/>
